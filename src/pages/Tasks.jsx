@@ -71,7 +71,7 @@ function Tasks() {
     
         axios.post("http://localhost/taskmanger/backend/task/create.php",formData).then(res=>{
         console.log(res);
-        axios.post("http://localhost/taskmanger/backend/task/read.php", {user_id: id}).then(res=>{
+        axios.post("http://localhost/taskmanger/backend/task/read.php", filter).then(res=>{
             console.log(res);
             setTasks(res.data)
         });
