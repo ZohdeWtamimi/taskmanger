@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 import UserService from '../apis/UserService';
 
 
 
 
 function Welcome() {
+  const navigate = useNavigate()
     const [data , setdata] = useState({
         name:"",
         email : "",
@@ -22,6 +24,7 @@ function Welcome() {
         axios.post("http://localhost/taskmanger/backend/user/create.php",data).then(res=>{
         console.log(res);
         localStorage.setItem("user",JSON.stringify(res.data))
+        navigate('/task')
       });
       }
   return (

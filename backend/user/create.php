@@ -19,7 +19,12 @@
     $user->password = $data->password;
     $user->email = $data->email;
     if($user->createUser()){
-        print_r(json_encode($data)) ;
+        $sql="SELECT * FROM users ORDER BY ID DESC LIMIT 1";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        print_r(json_encode($user));
+        // print_r(json_encode($data)) ;
 
     } else{
         echo json_encode("Failed to create user.");
