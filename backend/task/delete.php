@@ -14,15 +14,10 @@
     $task = new task($db);
 
     $task->id=$_POST["id"];
-    $task->user_id=$_POST["user_id"];
-    $task->name=$_POST["name"];
-    $task->category_id=$_POST["category"];
-    $task->priority=$_POST["priority"];
-    $task->completed=$_POST["completed"];
     
 
-    if($task->updateTask()){
-        echo json_encode("task created.");
+    if($task->deleteUser()){
+        echo json_encode("task deleted.");
 
     } else{
         echo json_encode("Failed to create task.");

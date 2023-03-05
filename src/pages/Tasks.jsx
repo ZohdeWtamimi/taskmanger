@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function Tasks() {
     const [data , setdata] = useState({
@@ -83,6 +84,20 @@ function Tasks() {
         })
       });
       }
+
+      const onDelete = (id)=>{
+        console.log(id)
+        const formData = new FormData()
+        formData.append('id',id)
+        console.log(id)
+        axios.post("http://localhost/taskmanger/backend/task/delete.php", formData).then(res=>{
+            console.log(res);
+            axios.post("http://localhost/taskmanger/backend/task/read.php", filter).then(res=>{
+                console.log(res);
+                setTasks(res.data)
+            });
+        });
+      }
   return (
     <div>
             <h1>create new task</h1>
@@ -163,7 +178,7 @@ function Tasks() {
                     <td>{e.name}</td>
                     <td>{e.completed}</td>
                     <td>{e.priority}</td>
-                    <td> <button>edit</button> <button>delete</button> </td>
+                    <td> <Link className='btn btn-dark' to={'/task/'+e.id}>edit</Link> <button onClick={()=> onDelete(e.id)} className='btn btn-danger'>delete</button> </td>
                 </tr>
                 ))}
             </tbody>

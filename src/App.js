@@ -5,6 +5,7 @@ import Welcome from './pages/Welcome';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Tasks from './pages/Tasks';
+import TaskEdit from './pages/TaskEdit';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <Routes>
     <Route path="/" element={<Welcome/>}/>
     <Route path="/task" element={<Tasks/>}/>
+    <Route path="/task/:id" element={<TaskEdit/>}/>
   </Routes>  
     </div>
   );

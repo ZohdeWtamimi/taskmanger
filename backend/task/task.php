@@ -95,28 +95,31 @@
         
 
        // UPDATE group
-        public function updatePost(){
+        public function updateTask(){
             $sqlQuery = "UPDATE
                         ". $this->dbTable ."
                     SET
-                    name = :name,
-                    group_id = :group_id,
-                    user_id = :user_id
-                    
+                    user_id = :user_id, 
+                    category_id = :category_id, 
+                    priority = :priority, 
+                    completed = :completed, 
+                    name = :name 
                     WHERE 
                         id = :id";
         
             $stmt = $this->conn->prepare($sqlQuery);
         
-            $this->name=htmlspecialchars(strip_tags($this->name));
-            $this->category_id=htmlspecialchars(strip_tags($this->category_id));
             $this->user_id=htmlspecialchars(strip_tags($this->user_id));
-            $this->id=htmlspecialchars(strip_tags($this->id));
-        
+            $this->category_id=htmlspecialchars(strip_tags($this->category_id));
+            $this->name=htmlspecialchars(strip_tags($this->name));
+                
+                       
             // bind data
-            $stmt->bindParam(":name", $this->name);
-            $stmt->bindParam(":category_id", $this->category_id);
             $stmt->bindParam(":user_id", $this->user_id);
+            $stmt->bindParam(":category_id", $this->category_id);
+            $stmt->bindParam(":name", $this->name);
+            $stmt->bindParam(":priority", $this->priority);
+            $stmt->bindParam(":completed", $this->completed);
             $stmt->bindParam(":id", $this->id);
         
             if($stmt->execute()){
@@ -125,20 +128,20 @@
             return false;
         }
 
-    //    // DELETE User
-    //     function deleteUser(){
-    //         $sqlQuery = "DELETE FROM " . $this->dbTable . " WHERE id = ?";
-    //         $stmt = $this->conn->prepare($sqlQuery);
+       // DELETE User
+        function deleteUser(){
+            $sqlQuery = "DELETE FROM " . $this->dbTable . " WHERE id = ?";
+            $stmt = $this->conn->prepare($sqlQuery);
         
-    //         $this->id=htmlspecialchars(strip_tags($this->id));
+            $this->id=htmlspecialchars(strip_tags($this->id));
         
-    //         $stmt->bindParam(1, $this->id);
+            $stmt->bindParam(1, $this->id);
         
-    //         if($stmt->execute()){
-    //             return true;
-    //         }
-    //         return false;
-    //     }
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }
 
     
       
